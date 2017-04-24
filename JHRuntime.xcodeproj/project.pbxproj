@@ -17,6 +17,7 @@
 		A850A0F81EA06EE500D8C1A0 /* JHRuntimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A850A0F71EA06EE500D8C1A0 /* JHRuntimeTests.m */; };
 		A850A1031EA06EE500D8C1A0 /* JHRuntimeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A850A1021EA06EE500D8C1A0 /* JHRuntimeUITests.m */; };
 		A850A1121EA06EFB00D8C1A0 /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A850A1111EA06EFB00D8C1A0 /* MyObject.m */; };
+		A85496F81EA4DBA1006E782E /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = A85496F71EA4DBA1006E782E /* Student.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		A850A1041EA06EE500D8C1A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A850A1101EA06EFB00D8C1A0 /* MyObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyObject.h; sourceTree = "<group>"; };
 		A850A1111EA06EFB00D8C1A0 /* MyObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyObject.m; sourceTree = "<group>"; };
+		A85496F61EA4DBA1006E782E /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		A85496F71EA4DBA1006E782E /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 				A850A0E11EA06EE500D8C1A0 /* ViewController.m */,
 				A850A1101EA06EFB00D8C1A0 /* MyObject.h */,
 				A850A1111EA06EFB00D8C1A0 /* MyObject.m */,
+				A85496F61EA4DBA1006E782E /* Student.h */,
+				A85496F71EA4DBA1006E782E /* Student.m */,
 				A850A0E31EA06EE500D8C1A0 /* Main.storyboard */,
 				A850A0E91EA06EE500D8C1A0 /* Assets.xcassets */,
 				A850A0EB1EA06EE500D8C1A0 /* LaunchScreen.storyboard */,
@@ -286,6 +291,7 @@
 				A850A0DF1EA06EE500D8C1A0 /* AppDelegate.m in Sources */,
 				A850A0DC1EA06EE500D8C1A0 /* main.m in Sources */,
 				A850A1121EA06EFB00D8C1A0 /* MyObject.m in Sources */,
+				A85496F81EA4DBA1006E782E /* Student.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +523,7 @@
 				A850A1091EA06EE500D8C1A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A850A10A1EA06EE500D8C1A0 /* Build configuration list for PBXNativeTarget "JHRuntimeTests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +532,7 @@
 				A850A10C1EA06EE500D8C1A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A850A10D1EA06EE500D8C1A0 /* Build configuration list for PBXNativeTarget "JHRuntimeUITests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +541,7 @@
 				A850A10F1EA06EE500D8C1A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
