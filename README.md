@@ -1,6 +1,8 @@
 # JHRuntime
 关于Objective-C的runtime深入了解
 
+[简书地址](http://www.jianshu.com/p/71ff362474a0)
+
 [TOC]
 
 
