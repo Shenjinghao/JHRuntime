@@ -19,7 +19,7 @@
 - Method Swizzling
 - 总结
 
-####引言
+#### 引言
 曾经觉得Objc特别方便上手，面对着 Cocoa 中大量 API，只知道简单的查文档和调用。还记得初学 Objective-C 时把[receiver message]当成简单的方法调用，而无视了**“发送消息”**这句话的深刻含义。其实[receiver message]会被编译器转化为：
 ```
 objc_msgSend(receiver, selector)
@@ -32,19 +32,19 @@ objc_msgSend(receiver, selector, arg1, arg2, ...)
 现在可以看出[receiver message]真的不是一个简简单单的方法调用。因为这只是在编译阶段确定了要向接收者发送message这条消息，而receive将要如何响应这条消息，那就要看运行时发生的情况来决定了。
 **Objective-C 的 Runtime 铸就了它动态语言的特性，这些深层次的知识虽然平时写代码用的少一些，但是却是每个 Objc 程序员需要了解的。**
 
-####简介
+#### 简介
 因为Objc是一门动态语言，所以它总是想办法把一些决定工作从编译连接推迟到运行时。也就是说只有编译器是不够的，还需要一个运行时系统 (runtime system) 来执行编译后的代码。这就是 Objective-C Runtime 系统存在的意义，它是整个Objc运行框架的一块**基石**。
 Runtime其实有两个版本:“modern”和 “legacy”。我们现在用的 Objective-C 2.0 采用的是现行(Modern)版的Runtime系统，只能运行在 iOS 和 OS X 10.5 之后的64位程序中。而OS X较老的32位程序仍采用 Objective-C 1中的（早期）Legacy 版本的 Runtime 系统。这两个版本最大的区别在于当你更改一个类的实例变量的布局时，在早期版本中你需要重新编译它的子类，而现行版就不需要。
 Runtime基本是用C和汇编写的，可见苹果为了动态系统的高效而作出的努力。你可以在[这里](http://www.opensource.apple.com/source/objc4/)下到苹果维护的开源代码。苹果和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。
 
-####与Runtime交互
+#### 与Runtime交互
 Objc 从三种不同的层级上与 Runtime 系统进行交互，分别是通过 Objective-C 源代码，通过 Foundation 框架的NSObject类定义的方法，通过对 runtime 函数的直接调用。
 
-####Objective-C源代码
+#### Objective-C源代码
 大部分情况下你就只管写你的Objc代码就行，runtime 系统自动在幕后辛勤劳作着。还记得引言中举的例子吧，消息的执行会使用到一些编译器为实现动态语言特性而创建的数据结构和函数，Objc中的类、方法和协议等在 runtime 中都由一些数据结构来定义，这些内容在后面会讲到。（比如objc_msgSend
 函数及其参数列表中的id和SEL都是啥）
 
-####NSObject的方法
+#### NSObject的方法
 Cocoa 中大多数类都继承于NSObject类，也就自然继承了它的方法。最特殊的例外是NSProxy，它是个抽象超类，它实现了一些消息转发有关的方法，可以通过继承它来实现一个其他类的替身类或是虚拟出一个不存在的类，说白了就是领导把自己展现给大家风光无限，但是把活儿都交给幕后小弟去干。
 有的NSObject中的方法起到了抽象接口的作用，比如description方法需要你重载它并为你定义的类提供描述内容。
 NSObject还有些方法能在运行时获得类的信息，并检查一些特性，比如class返回对象的类；
@@ -52,7 +52,7 @@ isKindOfClass:和isMemberOfClass:则检查对象是否在指定的类继承体�
 conformsToProtocol:检查对象是否实现了指定协议类的方法；
 methodForSelector:则返回指定方法实现的地址。
 
-####Runtime的函数
+#### Runtime的函数
 Runtime 系统是一个由一系列函数和数据结构组成，具有公共接口的动态共享库。头文件存放于/usr/include/objc目录下。（NSObject类也存在此目录下，而foundation里面存储了NSObject的category扩展类）
 
 ![objc目录下的NSObject](http://upload-images.jianshu.io/upload_images/2310905-cba44b61f47ee891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/620)
@@ -61,7 +61,7 @@ Runtime 系统是一个由一系列函数和数据结构组成，具有公共接
 
 许多函数允许你用纯C代码来重复实现 Objc 中同样的功能。虽然有一些方法构成了NSObject类的基础，但是你在写 Objc 代码时一般不会直接用到这些函数的，除非是写一些 Objc 与其他语言的桥接或是底层的debug工作。在[Objective-C Runtime Reference](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ObjCRuntimeRef/index.html)中有对 Runtime 函数的详细文档。
 
-####Runtime术语
+#### Runtime术语
 还记得引言中的objc_msgSend:方法吧，它的真身是这样的：
 ```
 id objc_msgSend ( id self, SEL op, ... );
@@ -72,7 +72,7 @@ id objc_msgSend ( id self, SEL op, ... );
 
 下面将会逐渐展开介绍一些术语，其实它们都对应着数据结构。
 
-####SEL
+#### SEL
 objc_msgSend函数第二个参数类型为SEL，它是selector在Objc中的表示类型（Swift中是Selector类）。selector是方法选择器，可以理解为区分方法的 ID，而这个 ID 的数据结构是SEL:
 ```
 typedef struct objc_selector *SEL;
@@ -85,7 +85,7 @@ typedef struct objc_selector *SEL;
 或者 Runtime 系统的sel_registerName函数来获得一个SEL类型的方法选择器。
 不同类中相同名字的方法所对应的方法选择器是相同的，即使方法名字相同而变量类型不同也会导致它们具有相同的方法选择器，于是 Objc 中方法命名有时会带上参数类型(NSNumber一堆抽象工厂方法拿走不谢)，Cocoa 中有好多长长的方法哦。
 
-####id
+#### id
 objc_msgSend
 第一个参数类型为id，大家对它都不陌生，它是一个指向类实例的指针：
 ```
@@ -102,7 +102,7 @@ objc_object
 结构体包含一个isa指针，根据isa指针就可以顺藤摸瓜找到对象所属的类。
 - PS:isa指针不总是指向实例对象所属的类，不能依靠它来确定类型，而是应该用class方法来确定实例对象的类。因为KVO的实现机理就是将被观察对象的isa指针指向一个中间类而不是真实的类，这是一种叫做 **isa-swizzling** 的技术，详见[官方文档](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueObserving/Articles/KVOImplementation.html)
 
-####Class
+#### Class
 之所以说isa是指针是因为Class其实是一个指向objc_class结构体的指针：
 ```
 typedef struct objc_class *Class;
@@ -1080,7 +1080,7 @@ SKNode.yxy_swizzleRemoveFromParent()
 我们之所以让自己的类继承NSObject
 不仅仅因为苹果帮我们完成了复杂的内存分配问题，更是因为这使得我们能够用上 Runtime 系统带来的便利。可能我们平时写代码时可能很少会考虑一句简单的[receiver message]
 背后发生了什么，而只是当做方法或函数调用。深入理解 Runtime 系统的细节更有利于我们利用消息机制写出功能更强大的代码，比如 Method Swizzling 等。
-参考链接：
+##### 参考链接：
 [Objective-C Runtime Programming Guide](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008048)
 [Objective-C runtime之运行时的基本特点](http://blog.csdn.net/wzzvictory/article/details/8615569)
 [Understanding the Objective-C Runtime](http://cocoasamurai.blogspot.jp/2010/01/understanding-objective-c-runtime.html)

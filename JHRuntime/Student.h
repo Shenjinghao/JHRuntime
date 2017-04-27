@@ -10,4 +10,9 @@
 
 @interface Student : NSObject
 
++ (void)learnClass:(NSString *)string;
+
+- (void)goToSchool:(NSString *)name;
+
+
 @end

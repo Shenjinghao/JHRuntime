@@ -49,6 +49,9 @@
     *age_pointer = 10;
     NSLog(@"%@", student);
     
+    
+    [self dynamicMethod];
+    
 }
 
 #pragma mark instance可以动态修改
@@ -112,6 +115,14 @@
         NSString *stringProperty = [NSString stringWithCString:string encoding:NSUTF8StringEncoding];
         NSLog(@"获取到的property名字%@，参数信息%@", propertyName,stringProperty);
     }
+}
+
+#pragma mark 动态解析方法
+- (void)dynamicMethod
+{
+    Student *student = [[Student alloc] init];
+    [student goToSchool:@"Hello"];
+    [Student learnClass:@"World"];
 }
 
 
